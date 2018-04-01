@@ -76,8 +76,10 @@ public class PostFragment extends Fragment
                 public void run()
                 {
                     posts.addAll(postsHolder.fetchPosts());
-                    posts.addAll(postsHolder.fetchMorePosts());
-                    posts.addAll(postsHolder.fetchMorePosts());
+                    do
+                    {
+                        posts.addAll(postsHolder.fetchMorePosts());
+                    }while(posts.size() < 200);
 
                     handler.post(new Runnable(){
                         public void run(){
@@ -120,6 +122,8 @@ public class PostFragment extends Fragment
 
         //int rand = new Random().nextInt(posts.size());
         int rand = new Random().nextInt(posts.size());
+        System.out.println("Size: " + posts.size());
+        System.out.println("Rand: " + rand);
 
         /*postTitle.setText(posts.get(rand).getTitle());
         postDetails.setText(posts.get(rand).getImageUrl());
@@ -127,34 +131,6 @@ public class PostFragment extends Fragment
         imageWebView.loadUrl(posts.get(rand).getImageUrl());
         //img.setImageBitmap(posts.get(rand).getImageBmp());
 
-        /*adapter = new ArrayAdapter<Post>(getActivity(), R.layout.posts, posts)
-        {
-            @Override
-            public View getView(int position, View convertView, ViewGroup parent)
-            {
-                if (convertView == null)
-                {
-                    convertView = getActivity().getLayoutInflater().inflate(R.layout.posts, null);
-                }
-
-                TextView postTitle;
-                postTitle = convertView.findViewById(R.id.post_title);
-
-                TextView postDetails;
-                postDetails = convertView.findViewById(R.id.post_details);
-
-                TextView postScore;
-                postScore = convertView.findViewById(R.id.post_score);
-
-                postTitle.setText(posts.get(position).title);
-                postDetails.setText(posts.get(position).getDetails());
-                postScore.setText(posts.get(position).getScore());
-                return convertView;
-            }
-        };*/
-        //int rand = new Random().nextInt(adapter.getCount()); PROBABLY DOESN"T BELONG HERE
-
-        //postView.setAdapter(adapter);
     }
 
 

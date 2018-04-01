@@ -47,36 +47,34 @@ public class PostsHolder
             JSONArray children = data.getJSONArray("children");
 
             after = data.getString("after");
-
             for (int i = 0; i < children.length(); i++)
             {
                 JSONObject cur = children.getJSONObject(i).getJSONObject("data");
-                JSONObject previewObj = cur.optJSONObject("preview");
-                JSONArray imagesObj = previewObj.optJSONArray("images");
-                JSONArray sourceObj = imagesObj.getJSONObject(0).optJSONArray("resolutions");
-                JSONObject resolution = sourceObj.getJSONObject(2);
+                try {
+                    JSONObject previewObj = cur.optJSONObject("preview");
+                    JSONArray imagesObj = previewObj.optJSONArray("images");
+                    JSONArray sourceObj = imagesObj.getJSONObject(0).optJSONArray("resolutions");
+                    JSONObject resolution = sourceObj.getJSONObject(2);
 
-                Post p = new Post();
-                p.title = cur.optString("title");
-                p.url = cur.optString("url");
-                p.numComments = cur.optInt("numComments");
-                p.points = cur.optInt("score");
-                p.author = cur.optString("author");
-                p.subreddit = cur.optString("subreddit");
-                p.permalink = cur.optString("permalink");
-                p.domain = cur.optString("domain");
-                p.id = cur.optString("id");
-                //p.imageUrl = cur.optString("thumbnail");
-                p.imageUrl = resolution.optString("url").replace("&amp;", "&");
+                    Post p = new Post();
+                    p.title = cur.optString("title");
+                    p.url = cur.optString("url");
+                    p.numComments = cur.optInt("numComments");
+                    p.points = cur.optInt("score");
+                    p.author = cur.optString("author");
+                    p.subreddit = cur.optString("subreddit");
+                    p.permalink = cur.optString("permalink");
+                    p.domain = cur.optString("domain");
+                    p.id = cur.optString("id");
+                    p.imageUrl = resolution.optString("url").replace("&amp;", "&");
 
-                //URL imgUrl = new URL(p.imageUrl);
-
-               // p.imageBmp = BitmapFactory.decodeStream(input);
-
-
-                if(p.title != null)
+                    if (p.title != null) {
+                        list.add(p);
+                    }
+                }
+                catch (Exception e)
                 {
-                    list.add(p);
+                    //Log.e("GOTTEM: ", e.toString());
                 }
             }
         }

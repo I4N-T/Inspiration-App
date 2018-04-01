@@ -45,7 +45,7 @@ public class RemoteData
         }
         try
         {
-            System.out.println(hcon.getResponseCode());
+            //System.out.println(hcon.getResponseCode());
             StringBuffer sb = new StringBuffer(8192);
             //StringBuilder sb = new StringBuilder(8192);
             String tmp = "";
