@@ -27,7 +27,7 @@ public class PostFragment extends Fragment
     Handler handler;
 
     String subreddit;
-    List<Post> posts;
+    public static List<Post> posts;
     PostsHolder postsHolder;
 
     public PostFragment()
@@ -35,6 +35,7 @@ public class PostFragment extends Fragment
         handler = new Handler();
         posts = new ArrayList<Post>();
     }
+
 
     public static Fragment newInstance (String subreddit)
     {
@@ -44,11 +45,19 @@ public class PostFragment extends Fragment
         return pf;
     }
 
+    public static Fragment newInstance (String subreddit, List<Post> _posts)  //this alternate constructor is used to prevent
+    {
+        PostFragment pf = new PostFragment();
+        pf.posts = _posts;
+        pf.subreddit = subreddit;
+        pf.postsHolder = new PostsHolder(pf.subreddit);
+        return pf;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View v = inflater.inflate(R.layout.posts, container, false);
-        //postView = v.findViewById(R.id.posts_view_object);
         postView = v;
         return v;
     }

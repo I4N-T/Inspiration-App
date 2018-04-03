@@ -2,5 +2,10 @@
     <string name="app_name">Inspiration</string>
 
     <string name="inspire_button">Inspire Me</string>
-    
+
+    <color name="background">#1d2621</color>
+    <color name="word_green">#64b78e</color>
+    <color name="word_key">#96751b</color>
+    <color name="bar_background">#14171c</color>
+
 </resources>

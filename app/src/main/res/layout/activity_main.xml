@@ -2,9 +2,10 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragments_holder"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/fragments_holder"
+    android:background="@color/background"
     tools:context="me.ianterry.inspiration.MainActivity">
 
     <Button
@@ -16,29 +17,50 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.866" />
+        app:layout_constraintVertical_bias="0.965" />
+
+    <TextView
+        android:id="@+id/key_textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/background"
+        android:text="Key: ??"
+        android:textColor="@color/word_key"
+        android:textSize="25dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.125"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.033" />
 
     <TextView
         android:id="@+id/word_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:text="Theme: Word"
+        android:textSize="25dp"
+        android:background="@color/background"
+        android:textColor="@color/word_green"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.117" />
+        app:layout_constraintVertical_bias="0.033" />
 
     <FrameLayout
         android:id="@+id/image_view"
         android:layout_width="650px"
-        android:layout_height="700px"
+        android:layout_height="750px"
+        android:background="@color/background"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias=".6" />
-<!---
+        app:layout_constraintVertical_bias="0.416" />
+    <!---
     <fragment
         android:id="@+id/image_fragment"
         android:layout_width="wrap_content"
