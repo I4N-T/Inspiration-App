@@ -1,13 +1,21 @@
 package me.ianterry.inspiration;
 
+import android.support.constraint.ConstraintLayout;
+import android.support.constraint.ConstraintSet;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import java.io.BufferedReader;
@@ -28,10 +36,15 @@ public class MainActivity extends AppCompatActivity {
     List<Post> mPostsList;
     FragmentManager mFragManager;
     FragmentTransaction mFragTransaction;
+    ConstraintLayout mConstraintLayout;
 
-    private Button mInspireButton;
+   // private Button mInspireButton;
+    private FloatingActionButton mInspireButton;
     private TextView mWordTextView;
     private TextView mKeyTextView;
+
+    private TextView mIntroTextView;
+    private FrameLayout mFrameLayout;
 
 
 
@@ -74,7 +87,31 @@ public class MainActivity extends AppCompatActivity {
 
         mWordTextView = findViewById(R.id.word_textView);
 
-        mInspireButton = findViewById(R.id.inspire_button);
+        mIntroTextView = findViewById(R.id.intro_textview);
+
+        mFrameLayout = findViewById(R.id.image_view);
+
+        mConstraintLayout = findViewById(R.id.fragments_holder);
+
+        mInspireButton = findViewById(R.id.fab);
+        mInspireButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                int rand = new Random().nextInt(wordList.size());
+                String wordToShow = "Theme: " + wordList.get(rand);
+                mWordTextView.setText(wordToShow);
+
+                rand = new Random().nextInt(keyList.size());
+                String keyToShow = "Key: " + keyList.get(rand);
+                mKeyTextView.setText(keyToShow);
+
+                mIntroTextView.setVisibility(View.INVISIBLE); //make this so it only happens on first button press
+                mFrameLayout.setVisibility(View.VISIBLE);
+                addFragment();
+            }
+        });
+        /*mInspireButton = findViewById(R.id.inspire_button);
         mInspireButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -90,7 +127,33 @@ public class MainActivity extends AppCompatActivity {
 
                 addFragment();
             }
-        });
+        });*/
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.toolbar_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.about:
+                aboutPopUp();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    void aboutPopUp()
+    {
+        DialogFragment dialogFrag = AboutDialogClass.newInstance();
+        dialogFrag.show(getSupportFragmentManager(), "dialog");
     }
 
     void addFragment()
@@ -98,6 +161,13 @@ public class MainActivity extends AppCompatActivity {
 
         if (mFragment == null)
         {
+            //change button position
+            ConstraintSet set = new ConstraintSet();
+            set.clone(mConstraintLayout);
+            set.centerVertically(R.id.fab, R.id.fragments_holder);
+            set.setVerticalBias(R.id.fab, 0.985f);
+            set.applyTo(mConstraintLayout);
+
             mFragment = PostFragment.newInstance("art");
             mFragManager = getSupportFragmentManager();
             mFragTransaction = mFragManager.beginTransaction();
