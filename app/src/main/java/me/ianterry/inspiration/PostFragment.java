@@ -45,7 +45,7 @@ public class PostFragment extends Fragment
         return pf;
     }
 
-    public static Fragment newInstance (String subreddit, List<Post> _posts)  //this alternate constructor is used to prevent
+    public static Fragment newInstance (String subreddit, List<Post> _posts)  //this alternate method prevents the initialize() method from running since posts will not be null
     {
         PostFragment pf = new PostFragment();
         pf.posts = _posts;
@@ -88,7 +88,7 @@ public class PostFragment extends Fragment
                     do
                     {
                         posts.addAll(postsHolder.fetchMorePosts());
-                    }while(posts.size() < 200);
+                    }while(posts.size() < 500);
 
                     handler.post(new Runnable(){
                         public void run(){
@@ -112,34 +112,14 @@ public class PostFragment extends Fragment
         }
 
 
-        //View convertView = getActivity().getLayoutInflater().inflate(R.layout.posts, null);
-
-        /*ImageView img;
-        img = postView.findViewById(R.id.post_image);*/
-
         WebView imageWebView;
         imageWebView = postView.findViewById(R.id.post_image);
 
-       /* TextView postTitle;
-        postTitle = postView.findViewById(R.id.post_title);
-
-        TextView postDetails;
-        postDetails = postView.findViewById(R.id.post_details);
-
-        TextView postScore;
-        postScore = postView.findViewById(R.id.post_score);*/
-
-        //int rand = new Random().nextInt(posts.size());
         int rand = new Random().nextInt(posts.size());
         System.out.println("Size: " + posts.size());
         System.out.println("Rand: " + rand);
 
-        /*postTitle.setText(posts.get(rand).getTitle());
-        postDetails.setText(posts.get(rand).getImageUrl());
-        postScore.setText(posts.get(rand).getScore());*/
         imageWebView.loadUrl(posts.get(rand).getImageUrl());
-        //img.setImageBitmap(posts.get(rand).getImageBmp());
-
     }
 
 
