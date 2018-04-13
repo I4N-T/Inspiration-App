@@ -2,7 +2,7 @@
     <string name="app_name">Sympiphany</string>
 
     <string name="about">About</string>
-    <string name="about_message">The Inspiration Generator displays a random piece of art, a random theme, and a random musical key. This information
+    <string name="about_message">This Musical Inspiration Generator displays a random piece of art, a random theme, and a random musical key. This information
     can be used as a prompt for your next musical creation.\n\nCreated by <b>Ian Terry</b></string>
     <string name="another">This is just another menu item.</string>
 

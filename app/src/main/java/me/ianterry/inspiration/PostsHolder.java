@@ -3,16 +3,11 @@ package me.ianterry.inspiration;
 /**
  * Created by Ian on 3/21/2018.
  */
-import java.net.URL;
+
 import java.util.ArrayList;
 import java.util.List;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.util.Log;
 
 public class PostsHolder
 {
@@ -74,13 +69,13 @@ public class PostsHolder
                 }
                 catch (Exception e)
                 {
-                    //Log.e("GOTTEM: ", e.toString());
+                    //Log.e("fetchPosts()_00: ", e.toString());
                 }
             }
         }
         catch (Exception e)
         {
-            Log.e("fetchPosts()", e.toString());
+            //Log.e("fetchPosts()_01", e.toString());
         }
         return list;
     }
